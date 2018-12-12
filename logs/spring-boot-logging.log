@@ -1,0 +1,105 @@
+2018/12/12-13:55 [restartedMain] INFO  com.alm.Application- Starting Application on ZSZVS0Q9AZ1TXPM with PID 7364 (E:\IdeaProject\12-7springboot-vue-crud\target\classes started by Administrator in E:\IdeaProject\12-7springboot-vue-crud)
+2018/12/12-13:55 [restartedMain] INFO  com.alm.Application- No active profile set, falling back to default profiles: default
+2018/12/12-13:55 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2018/12/12-13:55 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2018/12/12-13:55 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat initialized with port(s): 8080 (http)
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.StandardService- Starting service [Tomcat]
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.StandardEngine- Starting Servlet Engine: Apache Tomcat/9.0.13
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- An older version [1.2.17] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.18]
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- Loaded APR based Apache Tomcat Native library [1.2.17] using APR version [1.6.3].
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- OpenSSL successfully initialized [OpenSSL 1.0.2o  27 Mar 2018]
+2018/12/12-13:55 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring embedded WebApplicationContext
+2018/12/12-13:55 [restartedMain] INFO  org.springframework.web.context.ContextLoader- Root WebApplicationContext: initialization completed in 4047 ms
+2018/12/12-13:55 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Initializing ExecutorService 'applicationTaskExecutor'
+2018/12/12-13:55 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer- LiveReload server is running on port 35729
+2018/12/12-13:55 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat started on port(s): 8080 (http) with context path ''
+2018/12/12-13:55 [restartedMain] INFO  com.alm.Application- Started Application in 7.411 seconds (JVM running for 10.719)
+2018/12/12-13:56 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018/12/12-13:56 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet- Initializing Servlet 'dispatcherServlet'
+2018/12/12-13:56 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet- Completed initialization in 25 ms
+2018/12/12-13:56 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource- {dataSource-1} inited
+2018/12/12-13:56 [http-nio-8080-exec-2] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==>  Preparing: select deptno,dname,loc,createtime from dept limit ?,? 
+2018/12/12-13:56 [http-nio-8080-exec-2] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==> Parameters: 0(Integer), 5(Integer)
+2018/12/12-13:56 [http-nio-8080-exec-2] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- <==      Total: 5
+2018/12/12-13:56 [http-nio-8080-exec-2] DEBUG com.alm.dao.DeptDao.getTotal- ==>  Preparing: select count(*) from dept 
+2018/12/12-13:56 [http-nio-8080-exec-2] DEBUG com.alm.dao.DeptDao.getTotal- ==> Parameters: 
+2018/12/12-13:56 [http-nio-8080-exec-2] DEBUG com.alm.dao.DeptDao.getTotal- <==      Total: 1
+2018/12/12-13:56 [http-nio-8080-exec-5] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==>  Preparing: select deptno,dname,loc,createtime from dept WHERE dname like concat(concat('%',?),'%') limit ?,? 
+2018/12/12-13:56 [http-nio-8080-exec-5] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==> Parameters: d(String), 0(Integer), 5(Integer)
+2018/12/12-13:56 [http-nio-8080-exec-5] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- <==      Total: 0
+2018/12/12-13:56 [http-nio-8080-exec-5] DEBUG com.alm.dao.DeptDao.getTotal- ==>  Preparing: select count(*) from dept WHERE dname like concat(concat('%',?),'%') 
+2018/12/12-13:56 [http-nio-8080-exec-5] DEBUG com.alm.dao.DeptDao.getTotal- ==> Parameters: d(String)
+2018/12/12-13:56 [http-nio-8080-exec-5] DEBUG com.alm.dao.DeptDao.getTotal- <==      Total: 1
+2018/12/12-13:56 [http-nio-8080-exec-6] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==>  Preparing: select deptno,dname,loc,createtime from dept limit ?,? 
+2018/12/12-13:56 [http-nio-8080-exec-6] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==> Parameters: 0(Integer), 5(Integer)
+2018/12/12-13:56 [http-nio-8080-exec-6] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- <==      Total: 5
+2018/12/12-13:56 [http-nio-8080-exec-6] DEBUG com.alm.dao.DeptDao.getTotal- ==>  Preparing: select count(*) from dept 
+2018/12/12-13:56 [http-nio-8080-exec-6] DEBUG com.alm.dao.DeptDao.getTotal- ==> Parameters: 
+2018/12/12-13:56 [http-nio-8080-exec-6] DEBUG com.alm.dao.DeptDao.getTotal- <==      Total: 1
+2018/12/12-14:16 [Thread-19] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Shutting down ExecutorService 'applicationTaskExecutor'
+2018/12/12-14:16 [Thread-19] INFO  com.alibaba.druid.pool.DruidDataSource- {dataSource-1} closed
+2018/12/12-14:16 [restartedMain] INFO  com.alm.Application- Starting Application on ZSZVS0Q9AZ1TXPM with PID 7364 (E:\IdeaProject\12-7springboot-vue-crud\target\classes started by Administrator in E:\IdeaProject\12-7springboot-vue-crud)
+2018/12/12-14:16 [restartedMain] INFO  com.alm.Application- No active profile set, falling back to default profiles: default
+2018/12/12-14:16 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat initialized with port(s): 8080 (http)
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.StandardService- Starting service [Tomcat]
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.StandardEngine- Starting Servlet Engine: Apache Tomcat/9.0.13
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- An older version [1.2.17] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.18]
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- Loaded APR based Apache Tomcat Native library [1.2.17] using APR version [1.6.3].
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- OpenSSL successfully initialized [OpenSSL 1.0.2o  27 Mar 2018]
+2018/12/12-14:16 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring embedded WebApplicationContext
+2018/12/12-14:16 [restartedMain] INFO  org.springframework.web.context.ContextLoader- Root WebApplicationContext: initialization completed in 1883 ms
+2018/12/12-14:16 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Initializing ExecutorService 'applicationTaskExecutor'
+2018/12/12-14:16 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer- LiveReload server is running on port 35729
+2018/12/12-14:16 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat started on port(s): 8080 (http) with context path ''
+2018/12/12-14:16 [restartedMain] INFO  com.alm.Application- Started Application in 2.495 seconds (JVM running for 1269.051)
+2018/12/12-14:16 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener- Condition evaluation unchanged
+2018/12/12-14:16 [Thread-27] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Shutting down ExecutorService 'applicationTaskExecutor'
+2018/12/12-14:17 [restartedMain] INFO  com.alm.Application- Starting Application on ZSZVS0Q9AZ1TXPM with PID 7364 (E:\IdeaProject\12-7springboot-vue-crud\target\classes started by Administrator in E:\IdeaProject\12-7springboot-vue-crud)
+2018/12/12-14:17 [restartedMain] INFO  com.alm.Application- No active profile set, falling back to default profiles: default
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat initialized with port(s): 8080 (http)
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.StandardService- Starting service [Tomcat]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.StandardEngine- Starting Servlet Engine: Apache Tomcat/9.0.13
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- An older version [1.2.17] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.18]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- Loaded APR based Apache Tomcat Native library [1.2.17] using APR version [1.6.3].
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- OpenSSL successfully initialized [OpenSSL 1.0.2o  27 Mar 2018]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring embedded WebApplicationContext
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.web.context.ContextLoader- Root WebApplicationContext: initialization completed in 598 ms
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Initializing ExecutorService 'applicationTaskExecutor'
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer- LiveReload server is running on port 35729
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat started on port(s): 8080 (http) with context path ''
+2018/12/12-14:17 [restartedMain] INFO  com.alm.Application- Started Application in 1.0 seconds (JVM running for 1309.22)
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener- Condition evaluation unchanged
+2018/12/12-14:17 [Thread-33] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Shutting down ExecutorService 'applicationTaskExecutor'
+2018/12/12-14:17 [restartedMain] INFO  com.alm.Application- Starting Application on ZSZVS0Q9AZ1TXPM with PID 7364 (E:\IdeaProject\12-7springboot-vue-crud\target\classes started by Administrator in E:\IdeaProject\12-7springboot-vue-crud)
+2018/12/12-14:17 [restartedMain] INFO  com.alm.Application- No active profile set, falling back to default profiles: default
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat initialized with port(s): 8080 (http)
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.StandardService- Starting service [Tomcat]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.StandardEngine- Starting Servlet Engine: Apache Tomcat/9.0.13
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- An older version [1.2.17] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.18]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- Loaded APR based Apache Tomcat Native library [1.2.17] using APR version [1.6.3].
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener- OpenSSL successfully initialized [OpenSSL 1.0.2o  27 Mar 2018]
+2018/12/12-14:17 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring embedded WebApplicationContext
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.web.context.ContextLoader- Root WebApplicationContext: initialization completed in 449 ms
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Initializing ExecutorService 'applicationTaskExecutor'
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer- LiveReload server is running on port 35729
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat started on port(s): 8080 (http) with context path ''
+2018/12/12-14:17 [restartedMain] INFO  com.alm.Application- Started Application in 0.854 seconds (JVM running for 1321.802)
+2018/12/12-14:17 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener- Condition evaluation unchanged
+2018/12/12-14:17 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018/12/12-14:17 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet- Initializing Servlet 'dispatcherServlet'
+2018/12/12-14:17 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet- Completed initialization in 10 ms
+2018/12/12-14:17 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource- {dataSource-2} inited
+2018/12/12-14:17 [http-nio-8080-exec-1] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==>  Preparing: select deptno,dname,loc,createtime from dept limit ?,? 
+2018/12/12-14:17 [http-nio-8080-exec-1] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- ==> Parameters: 0(Integer), 5(Integer)
+2018/12/12-14:17 [http-nio-8080-exec-1] DEBUG com.alm.dao.DeptDao.findAllDeptByPage- <==      Total: 5
+2018/12/12-14:17 [http-nio-8080-exec-1] DEBUG com.alm.dao.DeptDao.getTotal- ==>  Preparing: select count(*) from dept 
+2018/12/12-14:17 [http-nio-8080-exec-1] DEBUG com.alm.dao.DeptDao.getTotal- ==> Parameters: 
+2018/12/12-14:17 [http-nio-8080-exec-1] DEBUG com.alm.dao.DeptDao.getTotal- <==      Total: 1

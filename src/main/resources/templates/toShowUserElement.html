@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>展示用户</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+</head>
+<body>
+This is a test page;
+<div id="app">
+    <el-button
+            size="mini"
+            type="primary"
+            @click="handleSave()">添加</el-button>
+    <template>
+        <el-table
+                :data="userList"
+                border
+                style="width: 100%">
+            <el-table-column
+                    label="日期"
+                    width="180">
+                <template slot-scope="scope">
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{ scope.row.createtime }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="姓名"
+                    width="180">
+                <template slot-scope="scope">
+                    <el-popover trigger="hover" placement="top">
+                        <p>姓名: {{ scope.row.username }}</p>
+                        <p>密码: {{ scope.row.password }}</p>
+                        <div slot="reference" class="name-wrapper">
+                            <el-tag size="medium">{{ scope.row.id }}</el-tag>
+                        </div>
+                    </el-popover>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button
+                            size="mini"
+                            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </template>
+</div>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            userList:[]
+        },
+        created:function () {//调用生命周期方法 加载数据
+            var temp = this;
+            axios.post('/userinfo/findAllUserJson')
+                .then(function(response){
+                    //console.log(response);
+                    temp.userList = response.data;
+                })
+                .catch(function(err){
+                    console.log(err);
+                });
+
+        },
+        methods: {
+
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            },
+            handleSave(){
+                window.location.href="toSave";
+
+            }
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

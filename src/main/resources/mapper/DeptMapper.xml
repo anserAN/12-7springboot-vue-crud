@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间指向dao接口 -->
+<mapper namespace="com.alm.dao.DeptDao">
+<!-- 定义公用sql代码 -->
+<sql id="mysqlstatement">
+	deptno,dname,loc,createtime
+</sql>
+
+<select id="findAllDept" resultType="dept">
+	select <include refid="mysqlstatement"></include> from dept
+</select>
+<select id="getDept" parameterType="Integer" resultType="dept">
+	select <include refid="mysqlstatement"></include> from dept where id=#{id}
+</select>
+<update id="updateDept" parameterType="dept" >
+	update dept set dname=#{dname},loc=#{loc},createtime=#{createtime} where deptno=#{deptno}
+</update>
+<insert id="insertDept" useGeneratedKeys="true" keyProperty="id" parameterType="dept">
+	insert into dept (dname,loc,createtime)values(#{dname},#{loc},#{createtime})
+</insert>
+<delete id="removeDept" parameterType="Integer">
+	delete from dept where deptno=#{qqqwq}
+</delete>
+	<select id="findAllDeptByPage" parameterType="map" resultType="dept">
+		select <include refid="mysqlstatement"></include> from dept
+		<where>
+			<if test="dname != null and dname!=''">
+				dname like concat(concat('%',#{dname}),'%')
+			</if>
+		</where>
+		limit #{startNo},#{endNo}
+	</select>
+	<select id="getTotal" parameterType="map" resultType="Integer">
+		select count(*) from dept
+		<where>
+			<if test="dname != null and dname!=''">
+				dname like concat(concat('%',#{dname}),'%')
+			</if>
+		</where>
+	</select>
+</mapper>

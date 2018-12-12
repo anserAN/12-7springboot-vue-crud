@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="app" style="width:500px;margin: auto;border: 1px solid #d5d3d6;">
+    <el-radio-group v-model="labelPosition" size="small">
+        <el-radio-button label="left">左对齐</el-radio-button>
+        <el-radio-button label="right">右对齐</el-radio-button>
+        <el-radio-button label="top">顶部对齐</el-radio-button>
+    </el-radio-group>
+    <div style="margin: 20px;"></div>
+    <el-form :label-position="labelPosition" label-width="80px" :model="dept">
+        <el-form-item label="部门名称">
+            <el-input v-model="dept.dname"></el-input>
+        </el-form-item>
+        <el-form-item label="部门地址">
+            <el-input v-model="dept.loc"></el-input>
+        </el-form-item>
+        <el-form-item label="创建时间">
+            <el-date-picker type="datetime" placeholder="选择日期时间" v-model="dept.createtime"></el-date-picker>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="submitForm(dept)">添加部门</el-button>
+            <!--<el-button @click="resetForm('numberValidateForm')">重置</el-button>-->
+        </el-form-item>
+    </el-form>
+</div>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+
+            labelPosition: 'right',
+            dept: {
+                dname: '',
+                loc: '',
+                createtime: ''
+            }
+
+        },
+        methods:{
+
+            submitForm(dept){
+                axios.post('/dept/insertDept', {
+                   dept: 'dept'
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+
+        }
+    })
+
+</script>
+</body>
+</html>

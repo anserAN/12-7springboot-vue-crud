@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dept</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style>
+        #input{
+            width:400px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <el-input id="input" v-model="deptname" placeholder="请输入部门名称关键字检索"></el-input>
+
+            <el-button type="primary" icon="el-icon-search" @click=loadingData() >搜索</el-button>
+        </div>
+        <el-button type="success" icon="el-icon-plus" @click="centerDialogVisible = true">添加部门</el-button>
+
+        <el-dialog
+                title="添加部门"
+                :visible.sync="centerDialogVisible"
+                width="40%"
+                center><!-- centerDialogVisible是否可关闭-->
+            <el-form :model="deptForm"  ref="deptForm" label-width="100px" >
+                <el-form-item label="部门名称"  >
+                    <el-input v-model="deptForm.dname"></el-input>
+                </el-form-item>
+                 <el-form-item label="部门地址" ><!-- prop="loc"  prop未绑定 应该是验证信息-->
+                    <el-input v-model="deptForm.loc"></el-input>
+                </el-form-item>
+
+                <el-form-item label="创建时间" >
+                    <div class="block">
+                        <el-date-picker
+                                v-model="deptForm.createtime"
+                                type="datetime"
+                                value-format="yyyy-MM-dd HH:mm:ss"
+                                placeholder="选择日期时间"><!--value-format="yyyy-MM-dd HH:mm:ss" 日期格式转换 -->
+                        </el-date-picker>
+                    </div>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm()">立即创建</el-button>
+                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+        <!--修改部门信息-->
+        <el-dialog
+                title="修改部门信息"
+                :visible.sync="updateDialogVisible"
+                width="40%"
+                center><!-- centerDialogVisible是否可关闭-->
+            <el-form :model="deptForm"  ref="deptForm" label-width="100px" ><!--:model="deptForm"  ref="deptForm"有什么用-->
+                <el-form-item label="部门编号">
+                    <el-input v-model="updateForm.deptno"></el-input>
+                </el-form-item>
+                <el-form-item label="部门名称"  >
+                    <el-input v-model="updateForm.dname"></el-input>
+                </el-form-item>
+                 <el-form-item label="部门地址" ><!-- prop="loc"  prop未绑定 应该是验证信息-->
+                    <el-input v-model="updateForm.loc"></el-input>
+                </el-form-item>
+
+                <el-form-item label="创建时间" >
+                    <div class="block">
+                        <el-date-picker
+                                v-model="updateForm.createtime"
+                                type="datetime"
+                                value-format="yyyy-MM-dd HH:mm:ss"
+                                placeholder="选择日期时间"><!--value-format="yyyy-MM-dd HH:mm:ss" 日期格式转换 -->
+                        </el-date-picker>
+                    </div>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button type="primary" @click="updateDeptForm()">修改</el-button>
+                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+        <el-table
+                :data="deptList"
+                border
+                style="width: 100%">
+            <el-table-column
+                    prop="deptno"
+                    label="部门编号"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="dname"
+                    label="部门名称"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="loc"
+                    label="部门地址">
+            </el-table-column>
+            <el-table-column
+                    prop="createtime"
+                    label="创建时间">
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button
+                            size="mini"
+                            @click="updateDept(scope.$index, scope.row)">编辑</el-button>
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="deleteDept(scope.$index, scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <!--分页-->
+        <div class="block">
+            <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="pageNo"
+                    :page-sizes="[5, 10, 15, 20]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total=total>
+            </el-pagination>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                deptList:[],
+                centerDialogVisible:false,
+                updateDialogVisible:false,
+                deptForm: {
+                    dname: '',
+                    loc: '',
+                    createtime: ''
+                },
+                updateForm: {
+                    dname: '',
+                    loc: '',
+                    createtime: ''
+                },
+                pageNo:1 ,//当前页
+                pageSize:5,//一页显示多少条数据
+                total:0,//总计多少条数据
+                deptname:''
+
+
+            },
+            created:function () {
+                //定义url
+                var url = '/dept/findAllDept';
+                //定义分页数据
+                var startNo = (this.pageNo - 1)*this.pageSize;
+                var endNo = this.pageSize;
+                //封装分页查询条件
+                var query = {"startNo":startNo,"endNo":endNo}
+                axios.post(url, query)
+                    .then(function (response) {
+                      
+                        vm.deptList = response.data.rowList;
+                        vm.total = response.data.totalRow;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            methods:{
+                loadingData:function(){//重新加载页面
+                    /*var url = '/dept/findAllDept';
+                    axios.post(url)
+                        .then(function (response) {
+                            // console.log(response);
+                            vm.deptList = response.data;
+                        })
+                        .catch(function (error) {
+                            //console.log(error);
+                        });*/
+                    var url = '/dept/findAllDept';
+                    //定义分页数据
+                    var startNo = (this.pageNo - 1)*this.pageSize;
+                    var endNo = this.pageSize;
+                    //封装分页查询条件
+                    var query = {"startNo":startNo,"endNo":endNo,"dname":vm.deptname}
+                    axios.post(url, query)
+                        .then(function (response) {
+
+                            vm.deptList = response.data.rowList;
+                            vm.total = response.data.totalRow;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+                },
+                open5(msg) {//消息弹窗
+                    this.$notify.info({
+                        title: '消息',
+                        message: msg
+                    });
+                },
+                handleSizeChange:function(pageSize) {
+                    vm.pageSize = pageSize;
+                    //刷新页面
+                    vm.loadingData();
+
+                },
+                handleCurrentChange:function (pageNo) {
+                    vm.pageNo = pageNo;
+                    vm.loadingData();
+                    
+                }
+                ,
+                submitForm:function () {// 添加操作 发送地址,参数(json数据对象类型)
+                    var URL = '/dept/insertDept';
+                    axios.post(URL,vm.deptForm)
+                        .then(function (response) {
+                            //添加成功
+                            vm.centerDialogVisible = false;
+                            vm.loadingData();
+                            //显示提示信息
+                            vm.open5(response.data.message);
+
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                deleteDept:function (index, row) {//删除方法
+                    var url = "deleteDeptById?id="+row.deptno//与查找回传的信息保持一致
+                    axios.get(url)
+                        .then(function (response) {
+                            vm.loadingData();
+                            vm.open5(response.data.message);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                updateDept:function (index, row) {
+                    vm.updateDialogVisible=true;
+                    vm.updateForm = row;
+                },
+                updateDeptForm:function () {
+                    var URL = 'updateDept';
+                    axios.post(URL,vm.updateForm)
+                        .then(function (response) {
+                            //修改成功
+                            vm.updateDialogVisible = false;
+                            vm.loadingData();
+                            //显示提示信息
+                            vm.open5(response.data.message);
+
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

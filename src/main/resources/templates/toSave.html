@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="app" style="width:500px;margin: auto;border: 1px solid #d5d3d6;">
+    <el-radio-group v-model="labelPosition" size="small">
+        <el-radio-button label="left">左对齐</el-radio-button>
+        <el-radio-button label="right">右对齐</el-radio-button>
+        <el-radio-button label="top">顶部对齐</el-radio-button>
+    </el-radio-group>
+    <div style="margin: 20px;"></div>
+    <el-form :label-position="labelPosition" label-width="80px" :model="userInfo">
+        <el-form-item label="用户名">
+            <el-input v-model="userInfo.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input v-model="userInfo.password"></el-input>
+        </el-form-item>
+        <el-form-item label="创建时间">
+            <el-date-picker type="datetime" placeholder="选择日期时间" v-model="userInfo.createtime"></el-date-picker>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="submitForm(userInfo)">添加用户</el-button>
+            <!--<el-button @click="resetForm('numberValidateForm')">重置</el-button>-->
+        </el-form-item>
+    </el-form>
+</div>
+<script>
+     var vm = new Vue({
+         el:"#app",
+         data:{
+
+                 labelPosition: 'right',
+                 userInfo: {
+                     username: '',
+                     password: '',
+                     createtime: ''
+                 }
+
+         },
+         methods:{
+
+             submitForm(userinfo){
+                console.log(userinfo.username);
+                console.log(userinfo.password);
+                console.log(userinfo.createtime);
+             },
+             resetForm(formName) {
+                 this.$refs[formName].resetFields();
+             }
+         }
+     })
+
+</script>
+</body>
+</html>
